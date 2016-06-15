@@ -29,7 +29,7 @@ var position = {
   height : function() {
     return document.body.scrollHeight;
   }
-}
+};
 
 function startScrolling() {
   // if we can scroll some more, scroll to next, if we can't, try again.
