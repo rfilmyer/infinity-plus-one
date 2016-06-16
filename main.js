@@ -31,18 +31,28 @@ var position = {
   }
 };
 
+var keepScrolling = false;
+
 function startScrolling() {
   // if we can scroll some more, scroll to next, if we can't, try again.
-  if ( position.height() !== 'undefined' || position.current() < position.height() ) {
-    setTimeout(function() {
-      position.scrollToNext();
-      startScrolling();
-    }, sleep_val);
-  } else {
-    setTimeout(function() {
-      startScrolling();
-    }, sleep_val);
-  } 
+  // unless we don't want to.
+  if (keepScrolling) {
+    if ( position.height() !== 'undefined' || position.current() < position.height() ) {
+      setTimeout(function() {
+        position.scrollToNext();
+        startScrolling();
+      }, sleep_val);
+    } else {
+      setTimeout(function() {
+        startScrolling();
+      }, sleep_val);
+    } 
+  }
 }
 
-window.onload = startScrolling();
+function toggleScrolling(){
+  keepScrolling = !keepScrolling;
+  startScrolling();
+}
+
+
